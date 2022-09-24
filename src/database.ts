@@ -1,4 +1,4 @@
-import { Entity, Column, DataSource, PrimaryGeneratedColumn, BaseEntity, AfterInsert } from "typeorm";
+import { Entity, Column, DataSource, PrimaryGeneratedColumn, BaseEntity, AfterInsert, BeforeInsert, ManyToOne, RelationId, OneToMany, Unique } from "typeorm";
 import fastify from 'fastify';
 import { Database, Resource } from '@adminjs/typeorm';
 import { validate } from 'class-validator';
@@ -32,9 +32,61 @@ export class PartnerKey extends BaseEntity {
     })
     partnerAuthenticationKey!: string;
 
+    @OneToMany(() => CustomerData, customerData => customerData.partnerId)
+    customers!: CustomerData[];
+
 }
 
-const resources = [PartnerKey];
+@Entity()
+export class CustomerData extends BaseEntity {
+
+    @BeforeInsert()
+    ensurePhoneOrEmail () {
+        if (!this.customerPhone && !this.customerEmail) {
+            throw new Error('Either phone or email is required');
+        }
+    }
+
+    @PrimaryGeneratedColumn()
+    id!: number;
+
+    @Column()
+    customerId!: string;
+
+    @Column({
+        nullable: true
+    })
+    customerEmail!: string;
+
+    @Column({
+        nullable: true
+    })
+    customerPhone!: string;
+
+    @Column({
+        nullable: true
+    })
+    customerFirstName!: string;
+
+    @Column({
+        nullable: true
+    })
+    customerLastName!: string;
+
+    @Column({
+        nullable: true
+    })
+    customerIP!: string;
+
+    @ManyToOne(() => PartnerKey, (partner) => partner.customers)
+    partner!: PartnerKey;
+
+    @RelationId((customerData: CustomerData) => customerData.partner)
+    partnerId!: number;
+
+}
+
+const resources = [PartnerKey, CustomerData];
 
 export const Postgres = new DataSource({
     type: 'postgres',
