@@ -32,3 +32,70 @@ JSON result using an invalid API key:
     "message": "API key does not exist"
 }
 ```
+
+## Creating a customer
+
+You can start sending customer data using the `entry` endpoint, called with the `POST` method.
+
+```js
+fetch('https://api.opm-media.io/entry', {
+    method: 'POST',
+    headers: {
+        'x-api-key': 'REPLACE-WITH-YOUR-KEY'
+    },
+    body: {
+        customerId: 7519,
+        customerEmail: 'customer7519xx@gmail.com',
+        customerPhone: '+15853042456',
+        customerFirstName: 'John'
+        customerLastName: 'Doe',
+        customerIP: '192.168.105.240'
+    }
+});
+```
+
+* `customerId` is a **required** property. This is the internal ID that you uses to identify the customer in **your** database. It has to be unique, so you can update customer information later using the same ID.
+* `customerEmail` is a **required** property, unless a phone number is specified (recommended).
+* `customerPhone` is a **required** property, unless an email is specified (recommended).
+* `customerFirstName` is an optional property (recommended).
+* `customerLastName` is an optional property (recommended).
+* `customerIP` is an optional property (recommended).
+
+JSON result using a valid API key:
+```json
+{
+    "statusCode": 201,
+    "message": "OK - Created"
+}
+```
+
+## Updating a customer
+
+Use the same `entry` endpoint to update customer information, such as the email, phone, last name, first name or IP.
+
+```js
+fetch('https://api.opm-media.io/entry', {
+    method: 'POST',
+    headers: {
+        'x-api-key': 'REPLACE-WITH-YOUR-KEY'
+    },
+    body: {
+        customerId: 7519,
+        customerEmail: 'customer7520xx@gmail.com', // update the email
+        customerPhone: '+15853042456',
+        customerFirstName: 'John'
+        customerLastName: 'Doe',
+        customerIP: '192.168.105.240'
+    }
+});
+```
+
+**customerId** and **x-api-key** has to be the same you used when creating the customer.
+
+JSON result using a valid API key:
+```json
+{
+    "statusCode": 202,
+    "message": "OK - Update accepted"
+}
+```
