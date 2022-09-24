@@ -1,0 +1,25 @@
+{
+  "name": "opm-partners-api",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "repository": "https://github.com/Androz2091/opm-partners-api.git",
+  "author": "Androz2091 <androz2091@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@adminjs/fastify": "^3.0.0",
+    "@adminjs/typeorm": "^4.0.0",
+    "@fastify/static": "^6.5.0",
+    "adminjs": "^6.2.4",
+    "class-validator": "^0.13.2",
+    "dotenv": "^16.0.2",
+    "fastify": "^4.6.0",
+    "pg": "^8.8.0",
+    "typeorm": "^0.3.10"
+  },
+  "devDependencies": {
+    "@types/node": "^18.7.19"
+  }
+}
