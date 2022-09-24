@@ -6,8 +6,42 @@ import fastify from 'fastify';
 
 const server = fastify();
 
-server.get('/ping', (req, reply) => {
-    reply.send('pong');
+server.get('/ping', {
+
+    schema: {
+        headers: {
+            type: 'object',
+            required: ['x-api-key'],
+            properties: {
+                'x-api-key': { type: 'string' },
+            }
+        }
+    },
+
+    handler: async (req, rep) => {
+
+        const key = req.headers['x-api-key'] as string;
+        const partner = await PartnerKey.findOne({
+            where: {
+                partnerAuthenticationKey: key
+            }
+        });
+        
+        if (!partner) {
+            return rep.status(401).send({
+                statusCode: 401,
+                error: "Unauthorized",
+                message: "API key does not exist"
+            });
+        }
+
+        rep.status(200).send({
+            statusCode: 200,
+            message: "pong"
+        });
+
+    }
+
 });
 
 server.post('/entry', {
@@ -59,7 +93,6 @@ server.post('/entry', {
                 partnerAuthenticationKey: key
             }
         });
-        console.log(partner, key)
         
         if (!partner) {
             return rep.status(401).send({
