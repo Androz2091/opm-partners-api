@@ -90,12 +90,34 @@ fetch('https://api.opm-media.io/entry', {
 });
 ```
 
-**customerId** and **x-api-key** has to be the same you used when creating the customer.
+**customerId** and **x-api-key** have to be the same you used when creating the customer.
 
 JSON result using a valid API key:
 ```json
 {
     "statusCode": 202,
     "message": "OK - Update accepted"
+}
+```
+
+## Errors
+
+Requests that do not match the required schemas will result in a `400` error. Some examples:
+
+When skipping required properties:
+```json
+{
+    "statusCode": 400,
+    "error": "Bad Request",
+    "message": "body must have either required property 'customerEmail' or 'customerPhone'"
+}
+```
+
+When using wrong properties type:
+```json
+{
+    "statusCode": 400,
+    "error": "Bad Request",
+    "message": "body/customerEmail must be string"
 }
 ```
