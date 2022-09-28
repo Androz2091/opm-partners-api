@@ -9,7 +9,7 @@ Your requests will be authenticated thanks to a single API key (one per project)
 Here is an example using the `ping` endpoint:
 
 ```js
-fetch('https://api.opm-media.io/ping', {
+fetch('https://api.opdmf.com/ping', {
     headers: {
         'x-api-key': 'REPLACE-WITH-YOUR-KEY'
     }
@@ -38,7 +38,7 @@ JSON result using an invalid API key:
 You can start sending customer data using the `entry` endpoint, called with the `POST` method.
 
 ```js
-fetch('https://api.opm-media.io/entry', {
+fetch('https://api.opdmf.com/entry', {
     method: 'POST',
     headers: {
         'x-api-key': 'REPLACE-WITH-YOUR-KEY'
@@ -74,7 +74,7 @@ JSON result using a valid API key:
 Use the same `entry` endpoint to update customer information, such as the email, phone, last name, first name or IP.
 
 ```js
-fetch('https://api.opm-media.io/entry', {
+fetch('https://api.opdmf.com/entry', {
     method: 'POST',
     headers: {
         'x-api-key': 'REPLACE-WITH-YOUR-KEY'
