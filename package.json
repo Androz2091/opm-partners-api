@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@adminjs/fastify": "^3.0.0",
+    "@adminjs/import-export": "^2.0.0",
     "@adminjs/typeorm": "^4.0.0",
     "@fastify/static": "^6.5.0",
     "adminjs": "^6.2.4",

@@ -7,6 +7,7 @@ import fastifyStatic from '@fastify/static';
 import AdminJS from 'adminjs';
 import AdminJSFastify from '@adminjs/fastify';
 import { join } from "path";
+import importExportFeature from "@adminjs/import-export";
 
 Resource.validate = validate;
 AdminJS.registerAdapter({ Database, Resource });
@@ -108,6 +109,7 @@ export const initialize = () => Postgres.initialize().then(async () => {
             rootPath: '/admin',
             resources: resources.map((r) => ({
                 resource: r,
+                features: [importExportFeature()],
                 options: (r === PartnerKey) ? {
                     properties: {
                         partnerAuthenticationKey: {
@@ -125,8 +127,6 @@ export const initialize = () => Postgres.initialize().then(async () => {
             cookiePassword: process.env.ADMINJS_COOKIE_PASSWORD,
             cookieName: 'adminjs',
             authenticate: async (_email, password) => {
-                // todo: remove
-                return true;
                 if (password === process.env.ADMINJS_PASSWORD) {
                     return true;
                 }
