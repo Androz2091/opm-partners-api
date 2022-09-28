@@ -47,7 +47,7 @@ fetch('https://api.opdmf.com/entry', {
         customerId: 7519,
         customerEmail: 'customer7519xx@gmail.com',
         customerPhone: '+15853042456',
-        customerFirstName: 'John'
+        customerFirstName: 'John',
         customerLastName: 'Doe',
         customerIP: '192.168.105.240'
     }
@@ -83,7 +83,7 @@ fetch('https://api.opdmf.com/entry', {
         customerId: 7519,
         customerEmail: 'customer7520xx@gmail.com', // update the email
         customerPhone: '+15853042456',
-        customerFirstName: 'John'
+        customerFirstName: 'John',
         customerLastName: 'Doe',
         customerIP: '192.168.105.240'
     }
